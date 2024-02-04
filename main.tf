@@ -15,6 +15,7 @@ resource "aws_instance" "ec2" {
   iam_instance_profile        = var.iam_instance_profile
   key_name                    = var.key_name
   monitoring                  = var.monitoring
+  subnet_id                   = var.subnet_id
   user_data                   = var.user_data
   user_data_replace_on_change = var.user_data_replace_on_change
   vpc_security_group_ids      = var.create_security_group ? [aws_security_group.security_group[0].id] : var.security_groups
