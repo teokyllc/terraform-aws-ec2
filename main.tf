@@ -56,5 +56,5 @@ resource "aws_security_group_rule" "security_group_rules" {
   protocol                 = each.value.protocol
   cidr_blocks              = each.value.cidr_blocks
   source_security_group_id = each.value.source_security_group_id
-  security_group_id        = aws_security_group.security_group.id
+  security_group_id        = aws_security_group.security_group[0].id
 }
