@@ -9,7 +9,7 @@ You can use versioned release tags to ensure that your project using this module
 <b>Repo latest commit</b><br>
 ```
 module "ec2" {
-  source = "github.com/Medality-Health/terraform-aws-ec2"
+  source = "github.com/teokyllc/terraform-aws-ec2"
   ...
 ```
 <br>
@@ -18,7 +18,7 @@ module "ec2" {
 
 ```
 module "ec2" {
-  source = "github.com/Medality-Health/terraform-aws-ec2?ref=1.0"
+  source = "github.com/teokyllc/terraform-aws-ec2?ref=1.0"
   ...
 ```
 <br>
@@ -28,7 +28,7 @@ This is an example of using this module something, fill in the rest.<br>
 
 ```
 module "ec2" {
-  source                                  = "github.com/Medality-Health/terraform-aws-ec2?ref=1.0"
+  source                                  = "github.com/teokyllc/terraform-aws-ec2?ref=1.0"
   ec2_name                                = "dev-vm"
   ami_most_recent                         = true
   ami_name                                = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
@@ -59,7 +59,7 @@ module "ec2" {
 <br><br>
 Module can be tested locally:<br>
 ```
-git clone https://github.com/Medality-Health/terraform-aws-ec2.git
+git clone https://github.com/teokyllc/terraform-aws-ec2.git
 cd terraform-aws-ec2
 
 cat <<EOF > ec2.auto.tfvars

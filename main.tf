@@ -17,7 +17,7 @@ resource "aws_instance" "ec2" {
   monitoring                  = var.monitoring
   user_data                   = var.user_data
   user_data_replace_on_change = var.user_data_replace_on_change
-  vpc_security_group_ids      = var.security_groups
+  vpc_security_group_ids      = var.create_security_group ? [aws_security_group.security_group[0].id] : var.security_groups
 
   root_block_device {
     volume_size           = var.volume_size
@@ -35,4 +35,26 @@ resource "aws_instance" "ec2" {
   lifecycle {
     ignore_changes = [ami]
   }
+}
+
+resource "aws_security_group" "security_group" {
+  count       = var.create_security_group ? 1 : 0
+  name        = var.security_group_name
+  description = var.security_group_description
+  vpc_id      = var.security_group_vpc_id
+  tags    = merge(var.tags, {
+    Name  = var.security_group_name
+  })
+}
+
+resource "aws_security_group_rule" "security_group_rules" {
+  for_each                 = var.security_group_rules
+  description              = each.value.description
+  type                     = each.value.type
+  from_port                = each.value.from_port
+  to_port                  = each.value.to_port
+  protocol                 = each.value.protocol
+  cidr_blocks              = each.value.cidr_blocks
+  source_security_group_id = each.value.source_security_group_id
+  security_group_id        = aws_security_group.security_group.id
 }
